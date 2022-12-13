@@ -24,11 +24,21 @@ class Books(BaseModel):
             "rating": 60
         }}
 
+class Book_no_rating(BaseModel):
+    id: UUID
+    title: str = Field(min_length=1,max_length=100)
+    author: str
+    description: Optional[str] = Field(min_length=1,max_length=100,description="Mentioend the description here")
+
+
 
 @app.get("/")
-async def get_all_books():
+async def get_some_books():
     return BOOKS
 
+@app.get("/rating")
+async def get_some_books():
+    return BOOKS
 
 @app.post("/")
 async def get_book(book: Books):  # books is a class so the fast api know that it is a request bofy
